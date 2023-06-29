@@ -1,13 +1,10 @@
-import Link from '@/components/Link'
+import Link from 'next/link'
 import { PageSEO } from '@/components/SEO'
-import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
 import formatDate from '@/lib/utils/formatDate'
-
-import NewsletterForm from '@/components/NewsletterForm'
-
-const MAX_DISPLAY = 5
+import About from '@/components/About'
+import Image from 'next/image'
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
@@ -18,84 +15,155 @@ export async function getStaticProps() {
 export default function Home({ posts }) {
   return (
     <>
-      <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
-          </p>
-        </div>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter
-            return (
-              <li key={slug} className="py-12">
-                <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date)}</time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link
-                              href={`/blog/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                        </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                          {summary}
-                        </div>
-                      </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`Read "${title}"`}
-                        >
-                          Read more &rarr;
-                        </Link>
-                      </div>
+      <PageSEO title={siteMetadata.title} />
+      <About />
+      <section class='pt-spacing'>
+        <h1 class='text-heading1 mx-auto max-w-4xl text-section-title font-bold'>
+          Blog Posts
+        </h1>
+        {!posts.length && 'No posts found.'}
+        {posts.slice(0, 2).map((frontMatter) => {
+          const { slug, date, title, summary } = frontMatter
+          return (
+            <ul key={slug} class='pt-card max-w-3xl mx-auto  '>
+              <Link href={`/blog/${slug}`}>
+                <article class='p-card bg-card rounded-lg shadow-lg shadow-bg-card/40 cursor-pointer'>
+                    <h2 class='text-heading2 text-card-heading font-semibold tracking-tightest '>
+                        {title}
+                    </h2>
+                    <div class='mt-2 mb-4 text-2xl font-medium'>
+                      <time dateTime={date}>{formatDate(date)}</time>
                     </div>
-                  </div>
+                    <div class='max-w-lg'>
+                      {summary}
+                    </div>
                 </article>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="all posts"
-          >
-            All Posts &rarr;
+              </Link>
+            </ul>
+          )
+        })}
+
+        <Link href='/blog'>
+          <div class='text-card-body text-link font-semibold mx-auto max-w-3xl pt-navbar cursor-pointer'>
+            Checkout More Here
+          </div>
+        </Link>
+      </section>
+      
+      <section class='pt-spacing'>
+        <h1 class='text-heading1 mx-auto max-w-4xl text-section-title font-bold'>
+          Renders
+        </h1>
+
+        <section class='pt-card max-w-3xl mx-auto'>
+          <article class='p-card bg-card rounded-lg shadow-lg shadow-bg-card/40'>
+            <h2 class='text-heading2 text-card-heading font-semibold tracking-tightest'>
+              Int Alpha
+            </h2>
+            <div class='grid grid-cols-2 mt-5 gap-6 grid-flow-col'>
+              <img src='/render/alpha/hero.webp' class='image self-center'/>
+              <div class='grid grid-cols-2 gap-3 h-content justify-between'>
+                <img src='/render/alpha/side/1.webp' class='image'/>
+                <img src='/render/alpha/side/2.webp' class='image'/>
+                <img src='/render/alpha/side/3.webp' class='image'/>
+                <img src='/render/alpha/side/4.webp' class='image'/>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class='pt-card max-w-3xl mx-auto'>
+          <article class='p-card bg-card rounded-lg shadow-lg shadow-bg-card/40'>
+            <h2 class='text-heading2 text-card-heading font-semibold tracking-tightest'>
+              GT300 Alpine A110
+            </h2>
+            <div class='grid grid-cols-2 mt-5 gap-6 grid-flow-col'>
+              <img src='/render/a110/hero.webp' class='image self-center'/>
+              <div class='grid grid-cols-2 gap-3 h-content justify-between'>
+                <img src='/render/a110/side/1.webp' class='image'/>
+                <img src='/render/a110/side/2.webp' class='image'/>
+                <img src='/render/a110/side/3.webp' class='image'/>
+                <img src='/render/a110/side/4.webp' class='image'/>
+              </div>
+            </div>
+          </article>
+
+          <Link href='https://www.artstation.com/calcium_3d'>
+            <div class='text-card-body text-link font-semibold mx-auto max-w-3xl pt-navbar cursor-pointer'>
+              Checkout More Here
+            </div>
           </Link>
-        </div>
-      )}
-      {siteMetadata.newsletter.provider !== '' && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
+        </section>
+      </section>
+
+      <section class='pt-spacing'>
+        <h1 class='text-heading1 mx-auto max-w-4xl text-section-title font-bold'>
+          Projects
+        </h1>
+
+        <section class='pt-card max-w-3xl mx-auto'>
+          <article class='p-card bg-card rounded-lg shadow-lg shadow-bg-card/40'>
+            <h2 class='mt-2 text-heading2 text-card-heading font-semibold tracking-tightest'>
+                Medical App Backend
+            </h2>
+            <h3 class='max-w-lg mt-2'>
+              An MVP built for the backend for a medical data logging app
+            </h3>
+            <h3 class='mt-12 max-w-lg text-2xl text-heading1 font-semibold'>
+              Technologies Used:
+            </h3>
+            <div class='flex flex-row space-x-3 mt-4'>
+              <p class='bg-technology px-[12px] py-[7px] rounded-lg'>
+                Prisma
+              </p>
+              <p class='bg-technology px-[12px] py-[7px] rounded-lg'>
+                Apollo
+              </p>
+              <p class='bg-technology px-[12px] py-[7px] rounded-lg'>
+                Graphql
+              </p>
+            </div>
+            <Link href='https://github.com/Calcium3d/server'>
+              <div class='text-card-body text-link font-semibold mx-auto max-w-3xl mt-8 cursor-pointer'>
+                Checkout the project here
+              </div>
+            </Link>
+
+          </article>
+        </section>
+
+        <section class='pt-card max-w-3xl mx-auto'>
+          <article class='p-card bg-card rounded-lg'>
+            <h2 class='mt-2 text-heading2 text-card-heading font-semibold tracking-tightest'>
+                CLI Password Manager
+            </h2>
+            <h3 class='max-w-lg mt-2'>
+              Password Manager built in rust as a proof concept of locally running password managers with proper standards of encryption
+            </h3>
+            <h3 class='mt-12 max-w-lg text-2xl text-heading1 font-semibold'>
+              Technologies Used:
+            </h3>
+            <div class='flex flex-row space-x-3 mt-4'>
+              <p class='bg-technology px-[12px] py-[7px] rounded-lg'>
+                Rusqlite
+              </p>
+            </div>
+            <Link href='https://github.com/Calcium3d/password_manager_rust_edition'>
+              <div class='text-card-body text-link font-semibold mx-auto max-w-3xl mt-8 cursor-pointer'>
+                Checkout the project here
+              </div>
+            </Link>
+
+          </article>
+
+          <Link href='https://github.com/Calcium3d'>
+            <div class='text-card-body text-link font-semibold mx-auto max-w-3xl pt-navbar pointer-events-auto cursor-pointer'>
+              Checkout More Here
+            </div>
+          </Link>
+        </section>
+      </section>
     </>
   )
 }
+
