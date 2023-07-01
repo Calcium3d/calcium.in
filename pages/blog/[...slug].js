@@ -1,4 +1,3 @@
-import PageTitle from '@/components/PageTitle'
 import { MDXLayoutRenderer } from '@/components/MDXComponents'
 import { formatSlug, getAllFilesFrontMatter, getFileBySlug, getFiles } from '@/lib/mdx'
 
@@ -37,12 +36,12 @@ export default function Blog({ post }) {
         />
       ) : (
         <div class="mt-24 text-center">
-          <PageTitle>
+          <div>
             Under Construction{' '}
             <span role="img" aria-label="roadwork sign">
               🚧
             </span>
-          </PageTitle>
+          </div>
         </div>
       )}
     </>

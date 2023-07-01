@@ -1,5 +1,3 @@
-import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 
@@ -9,7 +7,7 @@ export default function PostLayout({ frontMatter, children }) {
   const { slug, title, summary } = frontMatter
 
   return (
-    <SectionContainer>
+    <>
       <BlogSEO
         url={`${siteMetadata.siteUrl}/blog/${slug}`}
         {...frontMatter}
@@ -27,6 +25,6 @@ export default function PostLayout({ frontMatter, children }) {
             {children}
           </div>
       </article>
-    </SectionContainer>
+    </>
   )
 }
