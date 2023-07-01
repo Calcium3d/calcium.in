@@ -4,7 +4,6 @@ import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
 import formatDate from '@/lib/utils/formatDate'
 import About from '@/components/About'
-import Image from 'next/image'
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
@@ -17,7 +16,7 @@ export default function Home({ posts }) {
     <>
       <PageSEO title={siteMetadata.title} />
       <About />
-      <section class='pt-spacing'>
+      <section class='pt-spacing mx-10'>
         <h1 class='text-heading1 mx-auto max-w-4xl text-section-title font-bold'>
           Blog Posts
         </h1>
@@ -50,7 +49,7 @@ export default function Home({ posts }) {
         </Link>
       </section>
       
-      <section class='pt-spacing'>
+      <section class='pt-spacing mx-10'>
         <h1 class='text-heading1 mx-auto max-w-4xl text-section-title font-bold'>
           Renders
         </h1>
@@ -60,7 +59,7 @@ export default function Home({ posts }) {
             <h2 class='text-heading2 text-card-heading font-semibold tracking-tightest'>
               Int Alpha
             </h2>
-            <div class='grid grid-cols-2 mt-5 gap-6 grid-flow-col'>
+            <div class='grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 mt-5 gap-6 grid-flow-col'>
               <img src='/render/alpha/hero.webp' class='image self-center'/>
               <div class='grid grid-cols-2 gap-3 h-content justify-between'>
                 <img src='/render/alpha/side/1.webp' class='image'/>
@@ -77,7 +76,7 @@ export default function Home({ posts }) {
             <h2 class='text-heading2 text-card-heading font-semibold tracking-tightest'>
               GT300 Alpine A110
             </h2>
-            <div class='grid grid-cols-2 mt-5 gap-6 grid-flow-col'>
+            <div class='grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 mt-5 gap-6 grid-flow-col'>
               <img src='/render/a110/hero.webp' class='image self-center'/>
               <div class='grid grid-cols-2 gap-3 h-content justify-between'>
                 <img src='/render/a110/side/1.webp' class='image'/>
@@ -96,7 +95,7 @@ export default function Home({ posts }) {
         </section>
       </section>
 
-      <section class='pt-spacing'>
+      <section class='pt-spacing mx-10'>
         <h1 class='text-heading1 mx-auto max-w-4xl text-section-title font-bold'>
           Projects
         </h1>
@@ -112,12 +111,9 @@ export default function Home({ posts }) {
             <h3 class='mt-12 max-w-lg text-2xl text-heading1 font-semibold'>
               Technologies Used:
             </h3>
-            <div class='flex flex-row space-x-3 mt-4'>
+            <div class='flex lg:flex-row flex-wrap space-x-3 mt-4'>
               <p class='bg-technology px-[12px] py-[7px] rounded-lg'>
                 Prisma
-              </p>
-              <p class='bg-technology px-[12px] py-[7px] rounded-lg'>
-                Apollo
               </p>
               <p class='bg-technology px-[12px] py-[7px] rounded-lg'>
                 Graphql
