@@ -17,7 +17,7 @@ const LayoutWrapper = ({ children }) => {
             </Link>
           </div>
           <Link href="https://linktr.ee/calciumoxide">
-            <div class="text-link">
+            <div class="text-link cursor-pointer">
               LinkTree
             </div>
           </Link>
